@@ -1,0 +1,25 @@
+{
+  "name": "javascript-backend",
+  "version": "1.0.0",
+  "description": "testing",
+  "homepage": "https://github.com/DynaMax000/js-backend#readme",
+  "bugs": {
+    "url": "https://github.com/DynaMax000/js-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DynaMax000/js-backend.git"
+  },
+  "license": "ISC",
+  "author": "Lavesh Kartik",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.1.0",
+    "express": "^5.1.0"
+  }
+}
