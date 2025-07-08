@@ -1,0 +1,19 @@
+{
+  "name": "01_basics",
+  "version": "1.0.0",
+  "description": "basics for practicing node.js",
+  "keywords": [
+    "node js",
+    "learning"
+  ],
+  "license": "ISC",
+  "author": "Lavesh Kartik",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
