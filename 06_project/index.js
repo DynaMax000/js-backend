@@ -25,8 +25,13 @@ app.get('/edit/:filename', (req, res) => {
 
 
 app.post('/create', (req, res) => {
-  fs.writeFile(`./tasks/${req.body.title.split(' ').join('-')}.txt`, req.body.details, (error) => console.log("Error: ", error));
-  res.redirect("/");
+  if(!req.body.title || !req.body.details) {
+    return res.send("error");
+  }
+  else {
+    fs.writeFile(`./tasks/${req.body.title.split(' ').join('-')}.txt`, req.body.details, (error) => console.log("Error: ", error));
+    res.redirect("/");
+  }
 });
 
 app.post('/edit', (req, res) => {
