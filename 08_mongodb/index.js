@@ -34,6 +34,21 @@ app.post('/create', async (req, res) => {
   res.send(createdUser)
 });
 
+app.get('/edit-user/:id', async (req, res) => {
+  let user = await userModel.findOne({ _id: req.params.id });
+  res.render('edit', { user });
+});
+
+app.post('/update/:id', async (req, res) => {
+  let {name, email, image} = req.body;
+  let updatedUser = await userModel.findOneAndUpdate(
+    { _id: req.params.id },
+    { name, email, image },
+    { new: true }
+  );
+  res.redirect('/read');
+});
+
 app.listen(5000, ()=> {
   console.log('http://localhost:5000');
 });
