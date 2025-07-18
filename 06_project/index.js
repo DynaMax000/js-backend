@@ -26,7 +26,7 @@ app.get('/edit/:filename', (req, res) => {
 
 app.post('/create', (req, res) => {
   if(!req.body.title || !req.body.details) {
-    return res.send("error");
+    return res.send("error");   
   }
   else {
     fs.writeFile(`./tasks/${req.body.title.split(' ').join('-')}.txt`, req.body.details, (error) => console.log("Error: ", error));
