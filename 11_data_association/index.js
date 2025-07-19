@@ -14,9 +14,21 @@ app.get('/create-user', async(req, res) => {
     email: 'test@example.com',
     age: 30,
   });
-
   res.send(user);
-})
+});
+
+app.get('/post/create', async(req, res) => {
+  let post = await postModel.create({
+    postdata: 'This is a post',
+    user: '687be4d9595dc045f0085449',
+  });
+
+  let user = await userModel.findOne({_id: '687be4d9595dc045f0085449'});
+  user.posts.push(post._id);
+  user.save();
+
+  res.send({ post, user });
+});
 
 app.listen(4000, () => {
   console.log('http://localhost:4000');

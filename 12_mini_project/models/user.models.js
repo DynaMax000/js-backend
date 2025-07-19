@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/mydatabase')
+mongoose.connect('mongodb://localhost:27017/mini_project');
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  age: {
+    type: Number,
     required: true,
   },
   email: {
@@ -11,15 +19,14 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  age: {
-    type: Number,
-    min: 0,
+  password: {
+    type: String,
     required: true,
   },
-  posts: [{
+  post: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post'
   }]
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema)
