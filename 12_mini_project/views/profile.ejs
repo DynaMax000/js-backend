@@ -45,32 +45,16 @@
       <div class="flex flex-col mt-12 w-full text-white">
         <h2 class="text-xl mb-4">Your Posts</h2>
         <div class="post-container w-full gap-4">
-          <div class="post w-1/2 p-2 rounded-md bg-zinc-800">
-            <h1 class="text-blue-500 text-md">@usename</h1>
-            <p class="tracking-tight text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus esse vel reiciendis aliquid consequuntur, architecto minima totam assumenda quo, quas itaque? Eius voluptatibus itaque pariatur nulla reprehenderit maxime magni laboriosam. Totam vel laborum doloremque?</p>
-            <div class="btns flex justify-start gap-3 mt-2">
-              <a class="hover:text-pink-500"><i class="fa-solid fa-heart"></i></a>
-              <a href="" class="opacity-50 hover:text-blue-400 hover:opacity-100">Edit</i></a>
+          <% user.post.forEach(function(post){ %>
+            <div class="post w-1/2 mt-2 p-2 rounded-md bg-zinc-800">
+              <h1 class="text-blue-500 text-md">@<%= user.username %></h1>
+              <p class="tracking-tight text-sm"><%= post.content %></p>
+              <div class="btns flex justify-start gap-3 mt-2">
+                <a class="hover:text-pink-500"><i class="fa-solid fa-heart"></i></a>
+                <a href="" class="opacity-50 hover:text-blue-400 hover:opacity-100">Edit</i></a>
+              </div>
             </div>
-          </div>
-
-          <div class="post mt-2 w-1/2 p-2 rounded-md bg-zinc-800">
-            <h1 class="text-blue-500 text-md">@usename</h1>
-            <p class="tracking-tight text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus esse vel reiciendis aliquid consequuntur, architecto minima totam assumenda quo, quas itaque? Eius voluptatibus itaque pariatur nulla reprehenderit maxime magni laboriosam. Totam vel laborum doloremque?</p>
-            <div class="btns flex justify-start gap-3 mt-2">
-              <a class="hover:text-pink-500"><i class="fa-solid fa-heart"></i></a>
-              <a href="" class="opacity-50 hover:text-blue-400 hover:opacity-100">Edit</i></a>
-            </div>
-          </div>
-
-          <div class="post mt-2 w-1/2 p-2 rounded-md bg-zinc-800">
-            <h1 class="text-blue-500 text-md">@usename</h1>
-            <p class="tracking-tight text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus esse vel reiciendis aliquid consequuntur, architecto minima totam assumenda quo, quas itaque? Eius voluptatibus itaque pariatur nulla reprehenderit maxime magni laboriosam. Totam vel laborum doloremque?</p>
-            <div class="btns flex justify-start gap-3 mt-2">
-              <a class="hover:text-pink-500"><i class="fa-solid fa-heart"></i></a>
-              <a href="" class="opacity-50 hover:text-blue-400 hover:opacity-100">Edit</i></a>
-            </div>
-          </div>
+            <% }) %>
 
         </div>
       </div>

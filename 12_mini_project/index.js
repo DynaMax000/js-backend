@@ -23,8 +23,7 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/profile', isLoggedIn, async (req, res) => { 
-  let user = await userModel.findOne({ email: req.user.email });
-  console.log(user);
+  let user = await userModel.findOne({ email: req.user.email }).populate('post');
   res.render('profile', { user });
 });
 
@@ -76,14 +75,15 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/post', isLoggedIn, async (req, res) => {
-  let user = await userModel.findOnw({ email: req.user.email });
-  postModel.create({
+  let user = await userModel.findOne({ email: req.user.email });
+  let post = await postModel.create({
     user: user._id,
     content: req.body.content
   });
-
+  
   user.post.push(post._id);
-  user.save();
+  await user.save();
+  res.redirect('/profile');
 });
 
 function isLoggedIn(req, res, next) {
