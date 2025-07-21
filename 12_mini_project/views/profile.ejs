@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Hide Edge/Chrome password reveal button */
+    input[type="password"]::-ms-reveal,
+    input[type="password"]::-ms-clear,
+    input[type="password"]::-webkit-credentials-auto-fill-button,
+    input[type="password"]::-webkit-input-placeholder,
+    input[type="password"]::-webkit-input-password-reveal-button {
+      display: none !important;
+    }
+
+    input[type="password"]::-webkit-input-password-reveal {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-zinc-700 min-w-full min-h-screen min-w-screen flex">
+    <div class="flex flex-col p-4 w-full text-white">
+      <div class="flex w-full justify-end">
+        <a href="/logout" class="text-white bg-red-500 p-2 rounded-md inline-block outline-none">Logout</a>
+      </div>
+      <h1 class="text-white text-2xl">Hello, <%= user.name %>
+      </h1>
+      <h4>You can create a new post</h4>
+
+      <form action="/post" method="POST" class="flex flex-col gap-4 mt-4">
+        <div class="flex flex-col">
+          <textarea name="content" id="content" rows="6" class="p-2 w-1/2 rounded-md bg-zinc-800 text-white resize-none"
+            placeholder="What's on your mind?..." required></textarea>
+        </div>
+        <button type="submit" class="bg-blue-500 p-2 rounded-md hover:bg-blue-600 w-1/5 transition-colors">Create
+          Post</button>
+      </form>
+      <div class="flex flex-col mt-12 w-full text-white">
+        <h2 class="text-xl mb-4">Your Posts</h2>
+        <div class="post-container w-full gap-4">
+          <div class="post w-1/2 p-2 rounded-md bg-zinc-800">
+            <h1 class="text-blue-500 text-md">@usename</h1>
+            <p class="tracking-tight text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus esse vel reiciendis aliquid consequuntur, architecto minima totam assumenda quo, quas itaque? Eius voluptatibus itaque pariatur nulla reprehenderit maxime magni laboriosam. Totam vel laborum doloremque?</p>
+            <div class="btns flex justify-start gap-3 mt-2">
+              <a class="hover:text-pink-500"><i class="fa-solid fa-heart"></i></a>
+              <a href="" class="opacity-50 hover:text-blue-400 hover:opacity-100">Edit</i></a>
+            </div>
+          </div>
+
+          <div class="post mt-2 w-1/2 p-2 rounded-md bg-zinc-800">
+            <h1 class="text-blue-500 text-md">@usename</h1>
+            <p class="tracking-tight text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus esse vel reiciendis aliquid consequuntur, architecto minima totam assumenda quo, quas itaque? Eius voluptatibus itaque pariatur nulla reprehenderit maxime magni laboriosam. Totam vel laborum doloremque?</p>
+            <div class="btns flex justify-start gap-3 mt-2">
+              <a class="hover:text-pink-500"><i class="fa-solid fa-heart"></i></a>
+              <a href="" class="opacity-50 hover:text-blue-400 hover:opacity-100">Edit</i></a>
+            </div>
+          </div>
+
+          <div class="post mt-2 w-1/2 p-2 rounded-md bg-zinc-800">
+            <h1 class="text-blue-500 text-md">@usename</h1>
+            <p class="tracking-tight text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus esse vel reiciendis aliquid consequuntur, architecto minima totam assumenda quo, quas itaque? Eius voluptatibus itaque pariatur nulla reprehenderit maxime magni laboriosam. Totam vel laborum doloremque?</p>
+            <div class="btns flex justify-start gap-3 mt-2">
+              <a class="hover:text-pink-500"><i class="fa-solid fa-heart"></i></a>
+              <a href="" class="opacity-50 hover:text-blue-400 hover:opacity-100">Edit</i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>

@@ -23,7 +23,9 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/profile', isLoggedIn, async (req, res) => { 
-  res.send(`Welcome ${req.user.email}`);
+  let user = await userModel.findOne({ email: req.user.email });
+  console.log(user);
+  res.render('profile', { user });
 });
 
 
@@ -57,7 +59,6 @@ app.post('/register', async (req, res) => {
 app.post('/login', async (req, res) => {
   let { email, password } = req.body;
   let user = await userModel.findOne({ email });
-  console.log(user);
   if (!user) {
     return res.status(400).send('User not found');
   }
@@ -66,7 +67,7 @@ app.post('/login', async (req, res) => {
     if (result) {
       let token = jwt.sign({ email: email, userid: user._id }, "secret");
       res.cookie('token', token);
-      res.send('User logged in successfully');
+      res.redirect('/profile');
     }
     else {
       res.redirect('/login');
@@ -74,10 +75,21 @@ app.post('/login', async (req, res) => {
   });
 });
 
+app.post('/post', isLoggedIn, async (req, res) => {
+  let user = await userModel.findOnw({ email: req.user.email });
+  postModel.create({
+    user: user._id,
+    content: req.body.content
+  });
+
+  user.post.push(post._id);
+  user.save();
+});
+
 function isLoggedIn(req, res, next) {
   token = req.cookies.token;
   if(req.cookies.token === undefined) {
-    return res.send('You must be logged in');
+    return res.redirect('/login');
   }
   else
   {
