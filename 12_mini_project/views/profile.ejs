@@ -45,10 +45,10 @@
       <div class="flex flex-col mt-12 w-full text-white">
         <h2 class="text-xl mb-4">Your Posts</h2>
         <div class="post-container w-full gap-4">
-          <% user.post.forEach(function(post){ %>
+          <% user.post.reverse().forEach(function(post){ %>
             <div class="post w-1/2 mt-2 p-2 rounded-md bg-zinc-800">
               <h1 class="text-blue-500 text-md">@<%= user.username %></h1>
-              <p class="tracking-tight text-sm"><%= post.content %></p>
+              <p class="tracking-tight text-sm"><%= post.content %>, <%= post.date.toLocaleString() %></p>
               <div class="btns flex justify-start gap-3 mt-2">
                 <a class="hover:text-pink-500"><i class="fa-solid fa-heart"></i></a>
                 <a href="" class="opacity-50 hover:text-blue-400 hover:opacity-100">Edit</i></a>
