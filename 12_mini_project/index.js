@@ -22,11 +22,22 @@ app.get('/login', (req, res) => {
   res.render('login');
 });
 
-app.get('/profile', isLoggedIn, async (req, res) => { 
+app.get('/profile', isLoggedIn, async (req, res) => {
   let user = await userModel.findOne({ email: req.user.email }).populate('post');
   res.render('profile', { user });
 });
 
+app.get('/like/:_id', isLoggedIn, async (req, res) => {
+  let post = await postModel.findOne({ _id: req.params._id }).populate('user');
+  if (post.likes.indexOf(req.user.userid) === -1) {
+    post.likes.push(req.user.userid);
+  }
+  else {
+    post.likes.splice(post.likes.indexOf(req.user.userid), 1);
+  }
+  await post.save();
+  res.redirect("/profile");
+});
 
 app.get('/logout', (req, res) => {
   res.clearCookie('token', ' ');
@@ -80,7 +91,7 @@ app.post('/post', isLoggedIn, async (req, res) => {
     user: user._id,
     content: req.body.content
   });
-  
+
   user.post.push(post._id);
   await user.save();
   res.redirect('/profile');
@@ -88,11 +99,10 @@ app.post('/post', isLoggedIn, async (req, res) => {
 
 function isLoggedIn(req, res, next) {
   token = req.cookies.token;
-  if(req.cookies.token === undefined) {
+  if (req.cookies.token === undefined) {
     return res.redirect('/login');
   }
-  else
-  {
+  else {
     let data = jwt.verify(req.cookies.token, 'secret');
     req.user = data;
     next();
