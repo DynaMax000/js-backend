@@ -34,13 +34,13 @@
           <% user.post.reverse().forEach(function(post){ %>
             <div class="post w-1/2 mt-2 p-2 rounded-md bg-zinc-800">
               <h1 class="text-blue-500 text-md">@<%= user.username %></h1>
-              <p class="tracking-tight text-sm"><%= post.content %>, <%= post.date.toLocaleString() %></p>
+              <p class="tracking-tight text-sm"><%= post.content %></p>
               <div class="btns flex justify-start gap-3 mt-2">
                 <small class="inline-block"><%= post.likes.length %> likes</small>
                 <a class="<%= post.likes && post.likes.includes(user._id) ? 'text-pink-500' : 'text-gray-400 hover:text-pink-500' %>" href="/like/<%= post._id %>">
                   <i class="fa-solid fa-heart"></i>
                 </a>
-                <a href="" class="opacity-50 hover:text-blue-400 hover:opacity-100">Edit</a>
+                <a href="/edit/<%= post._id %>" class="opacity-50 hover:text-blue-400 hover:opacity-100">Edit</a>
               </div>
             </div>
             <% }) %>

@@ -39,6 +39,15 @@ app.get('/like/:_id', isLoggedIn, async (req, res) => {
   res.redirect("/profile");
 });
 
+app.get('/edit/:_id', isLoggedIn, async (req, res) => {
+  let post = await postModel.findOne({ _id: req.params._id }).populate('user');
+  // Check if the user owns this post
+  if (post.user._id.toString() !== req.user.userid) {
+    return res.redirect('/profile');
+  }
+  res.render("edit", { post });
+});
+
 app.get('/logout', (req, res) => {
   res.clearCookie('token', ' ');
   res.redirect('/login');
@@ -108,6 +117,12 @@ function isLoggedIn(req, res, next) {
     next();
   }
 };
+
+app.post('/update/:_id', isLoggedIn, async (req, res) => {
+  let post = await postModel.findOneAndUpdate({ _id: req.params._id }, {content: req.body.content}, {new: true});
+  res.redirect("/profile");
+});
+
 
 app.listen(4000, () => {
   console.log('http://localhost:4000');
