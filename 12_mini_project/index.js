@@ -53,6 +53,11 @@ app.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
+app.get('/test', isLoggedIn, async (req, res) => {
+  let user = await userModel.findOne({ email: req.user.email }).populate('post');
+  res.render('test', { user }); 
+});
+
 app.post('/register', async (req, res) => {
   let { username, name, email, age, password } = req.body;
   let user = await userModel.findOne({ email });
@@ -121,6 +126,10 @@ function isLoggedIn(req, res, next) {
 app.post('/update/:_id', isLoggedIn, async (req, res) => {
   let post = await postModel.findOneAndUpdate({ _id: req.params._id }, {content: req.body.content}, {new: true});
   res.redirect("/profile");
+});
+
+app.post('/upload', isLoggedIn, (req, res) => {
+  console.log(req.file);
 });
 
 
